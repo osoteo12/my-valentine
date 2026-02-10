@@ -14,7 +14,8 @@ body {
   display: grid;
   place-content: center;
   background: #f8f6f1;
-  overflow-x: hidden; /* safer than hidden */
+  overflow-x: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 /* =========================
@@ -29,27 +30,34 @@ body {
   text-align: center;
 }
 
-
+/* Shiny pink text */
 .shine {
   font-size: clamp(22px, 6vw, 60px);
-  font-weight: bold;
-  color: rgba(255, 0, 102, 0.3);
+  font-weight: 800;
+
   background: linear-gradient(
     to right,
-    #222 0%,
-    #fff 50%,
-    #222 100%
+    #ff3b7a 0%,
+    #ffd1dc 50%,
+    #ff3b7a 100%
   );
-  background-size: 150px;
+
+  background-size: 200px;
   background-repeat: no-repeat;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
   animation: shine 3s infinite;
+}
+
+/* spacing between headline lines */
+.shine + .shine {
+  margin-top: 10px;
 }
 
 /* Shine animation */
 @keyframes shine {
-  0% { background-position: -200%; }
+  0%   { background-position: -200%; }
   100% { background-position: 200%; }
 }
 
@@ -60,22 +68,27 @@ body {
   --d: 10s;
   display: grid;
   place-items: center;
-  width: min(70vw, 220px); /* responsive width */
+  width: min(70vw, 220px);
   margin: 0 auto;
 }
 
+/* Images */
 .gallery > img {
   grid-area: 1 / 1;
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
+
   border: 8px solid #f2f2f2;
-  box-shadow: 0 0 4px #0007;
+  box-shadow: 0 4px 8px #0004;
+
   z-index: 2;
-  animation: slide var(--d) infinite,
-             z-order var(--d) infinite steps(1);
+  animation:
+    slide var(--d) infinite,
+    z-order var(--d) infinite steps(1);
 }
 
+/* last image z-order fix */
 .gallery img:last-child {
   animation-name: slide, z-order-last;
 }
@@ -87,7 +100,7 @@ body {
 .gallery > img:nth-child(4) { --r: 6deg; }
 .gallery > img:nth-child(5) { --r: -8deg; }
 
-/* Stagger animation timing */
+/* Stagger timing */
 .gallery > img:nth-child(1) { animation-delay: 0s; }
 .gallery > img:nth-child(2) { animation-delay: -2s; }
 .gallery > img:nth-child(3) { animation-delay: -4s; }
@@ -127,7 +140,7 @@ body {
 
   .gallery > img {
     border: 5px solid #f2f2f2;
-    box-shadow: 0 0 3px #0005;
+    box-shadow: 0 2px 4px #0003;
   }
 
   @keyframes slide {
