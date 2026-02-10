@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Day Flip Book</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="hearts-bg"></div>
+
+  <div id="hedlinecontainer">
+    <div id="shine">Happy Valentine's Day💞</div>
+    <div id="subheadline">I Love You So Muuuuch!</div>
+  </div>
+
+  <div class="gallery">
+    <img src="img/churros-star-mirror.jpg" alt="Churros star mirror">
+    <img src="img/ai-image.jpg" alt="AI art card">
+    <img src="img/baguio.jpg" alt="Baguio scenery">
+    <img src="img/sante-barley-finisher.jpg" alt="Sante Barley finisher">
+    <img src="img/six-doorz.jpg" alt="Six Doorz">
+  </div>
+  <div class="hint" id="hint">Tap card to pause / resume</div>
+
+  <script>
+    // floating hearts background
+    (function(){
+      const heartsBg = document.getElementById('hearts-bg');
+      const heartSymbols = ['❤️', '💕', '💖', '💗', '💝'];
+
+      function createFloatingHeart(){
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart';
+        heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        heart.style.opacity = Math.random() * 0.5 + 0.3;
+        heart.style.fontSize = (Math.random() * 20 + 16) + 'px';
+        heartsBg.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 7000);
+      }
+
+      setInterval(createFloatingHeart, 300);
+    })();
+
+    // gallery pause/play
+    (function(){
+      const gallery = document.querySelector('.gallery');
+      const hint = document.getElementById('hint');
+      let paused = false;
+
+      function togglePause(){
+        paused = !paused;
+        gallery.classList.toggle('paused', paused);
+        hint.textContent = paused ? 'Paused — tap to resume' : 'Tap card to pause / resume';
+      }
+
+      // Tap / click toggles pause
+      gallery.addEventListener('click', togglePause);
+
+      // Keyboard support (space)
+      window.addEventListener('keydown', e => {
+        if(e.code === 'Space'){
+          e.preventDefault();
+          togglePause();
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
